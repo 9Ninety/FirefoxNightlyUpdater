@@ -1,0 +1,120 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        d:DesignWidth="400" d:DesignHeight="180"
+        Height="180" Width="400"
+        x:Class="FirefoxNightlyMSIXUpdater.MainWindow"
+        Title="Firefox Updater"
+        WindowStartupLocation="CenterScreen"
+        FontSize="16"
+        CanResize="False"
+        TransparencyLevelHint="Mica"
+        Background="{x:Null}"
+        Icon="\Resources\updater.ico"
+        ExtendClientAreaToDecorationsHint="True"
+        ExtendClientAreaChromeHints="PreferSystemChrome"
+        Closing="WindowClosing"
+        Opened="WindowLoaded">
+<Window.Styles>
+  <Style Selector="Grid[IsVisible=true].OpacityAnimation">
+    <Style.Animations>
+      <Animation Duration="0:0:0.25" Easing="ExponentialEaseIn">
+        <KeyFrame Cue="0%">
+          <Setter Property="Opacity" Value="0.0"></Setter>
+        </KeyFrame>
+        <KeyFrame Cue="100%">
+          <Setter Property="Opacity" Value="1.0"></Setter>
+        </KeyFrame>
+      </Animation>
+    </Style.Animations>
+  </Style>
+  <Style Selector="Grid[IsVisible=true].ScaleInAnimation">
+    <Style.Animations>
+      <Animation Duration="0:0:0.35" Easing="ExponentialEaseOut">
+        <KeyFrame Cue="0%">
+          <Setter Property="Opacity" Value="0.0"></Setter>
+          <Setter Property="ScaleTransform.ScaleX" Value="1.5"></Setter>
+          <Setter Property="ScaleTransform.ScaleY" Value="1.5"></Setter>
+        </KeyFrame>
+        <KeyFrame Cue="100%">
+          <Setter Property="Opacity" Value="1.0"></Setter>
+          <Setter Property="ScaleTransform.ScaleX" Value="1"></Setter>
+          <Setter Property="ScaleTransform.ScaleY" Value="1"></Setter>
+        </KeyFrame>
+      </Animation>
+    </Style.Animations>
+  </Style>
+</Window.Styles>
+  
+  <Grid RowDefinitions="*">
+    <Panel>
+      <Border IsHitTestVisible="False" Background="White" Opacity="0.875" Padding="10,5,0,0">
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
+          <Image Source="\Resources\updater.ico" Width="16" Height="16" Margin="0,0,10,0" />
+          <TextBlock FontSize="14">Firefox Updater</TextBlock>
+        </StackPanel>
+      </Border>
+    </Panel>
+
+    <Grid Name="ContentGrid" Margin="10,40,10,10" RowDefinitions="Auto,Auto,*" IsVisible="False" Classes="OpacityAnimation">
+      <Grid Grid.Row="0" RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,Auto">
+        <Label Grid.Row="0" Grid.Column="0" FontWeight="DemiBold">Installed version</Label>
+        <Label Grid.Row="0" Grid.Column="1" Name="InstalledVersion" Margin="15,0,0,0" Foreground="#444444">0.0.0.0</Label>
+
+        <Label Grid.Row="1" Grid.Column="0" FontWeight="DemiBold">Latest version</Label>
+        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" Margin="15,0,0,0">
+          <Label Name="OnlineVersion" Foreground="#444444">0.0.0.0</Label>
+          <Label Name="OnlineInstallerDate" Foreground="#6D6D6D" FontWeight="SemiLight">(3000-01-01 00:00)</Label>
+        </StackPanel>
+      </Grid>
+
+      <ProgressBar Name="DownloadProgress" Grid.Row="1" Margin="0,10,0,0" Height="10" Value="0" />
+
+      <StackPanel Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+        <Button Name="UpdateButton" Padding="10,5" Foreground="Black" Background="White" BorderThickness="1" BorderBrush="LightGray"
+                Click="UpdateButtonClick">
+          Update
+        </Button>
+      </StackPanel>
+    </Grid>
+
+    <Grid Name="LoadingMask" IsVisible="False">
+      <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Image Source="/Resources/fa-circle-notch.png" Width="20" Classes="Rotating">
+          <Image.Styles>
+            <Style Selector="Image.Rotating">
+              <Style.Animations>
+                <Animation Duration="0:0:1" IterationCount="INFINITE">
+                  <KeyFrame Cue="0%">
+                    <Setter Property="RotateTransform.Angle" Value="0" />
+                  </KeyFrame>
+                  <KeyFrame Cue="100%">
+                    <Setter Property="RotateTransform.Angle" Value="360" />
+                  </KeyFrame>
+                </Animation>
+              </Style.Animations>
+            </Style>
+          </Image.Styles>
+        </Image>
+        <Label Name="LoadingText" Margin="5,0,0,0" FontSize="18">Checking for latest version</Label>
+      </StackPanel>
+    </Grid>
+    
+    <Grid Name="UpToDateMask" Margin="10,10,10,10" IsVisible="False" Classes="ScaleInAnimation">
+      <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Image Source="/Resources/fa-circle-check-regular.png" Width="25">
+        </Image>
+        <Label Margin="10,0,0,0" FontSize="24" FontWeight="SemiLight">Up to date</Label>
+      </StackPanel>
+      
+      <StackPanel HorizontalAlignment="Right" VerticalAlignment="Bottom">
+        <Button Name="CloseButton" Padding="10,5" Foreground="Black" Background="White" BorderThickness="1" BorderBrush="LightGray"
+                Click="CloseButtonClick">
+          Close
+        </Button>
+      </StackPanel>
+    </Grid>
+  </Grid>
+</Window>

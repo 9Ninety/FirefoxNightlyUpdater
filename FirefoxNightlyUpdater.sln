@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32929.385
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FirefoxNightlyMSIXUpdater", "FirefoxNightlyMSIXUpdater\FirefoxNightlyMSIXUpdater.csproj", "{9072FC60-7ED1-44DC-BDF4-15C3F7C537DB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{147BFF04-4EA7-405D-B9ED-3EB0240A9860}"
+	ProjectSection(SolutionItems) = preProject
+		Scripts\Publish-All.bat = Scripts\Publish-All.bat
+		Scripts\Publish-NET7-Independence.bat = Scripts\Publish-NET7-Independence.bat
+		Scripts\Publish-NET7.bat = Scripts\Publish-NET7.bat
+		README.md = README.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9072FC60-7ED1-44DC-BDF4-15C3F7C537DB}.Debug|x64.ActiveCfg = Debug|x64
+		{9072FC60-7ED1-44DC-BDF4-15C3F7C537DB}.Debug|x64.Build.0 = Debug|x64
+		{9072FC60-7ED1-44DC-BDF4-15C3F7C537DB}.Release|x64.ActiveCfg = Release|x64
+		{9072FC60-7ED1-44DC-BDF4-15C3F7C537DB}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {488ED12C-30F4-4138-AC86-1F12E2B6E0DF}
+	EndGlobalSection
+EndGlobal

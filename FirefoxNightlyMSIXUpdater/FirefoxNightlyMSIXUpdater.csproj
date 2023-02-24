@@ -1,0 +1,65 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <TargetFrameworks>net7.0-windows10.0.17763.0</TargetFrameworks>
+        <RuntimeIdentifier>win10-x64</RuntimeIdentifier>
+        <Nullable>enable</Nullable>
+        <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+        <ApplicationIcon>Resources\updater.ico</ApplicationIcon>
+		<LangVersion>latest</LangVersion>
+		<PublishReadyToRunCrossgen2ExtraArgs>--compile-no-methods</PublishReadyToRunCrossgen2ExtraArgs>
+		<Platforms>AnyCPU;x64</Platforms>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+        <DebugType>none</DebugType>
+        <DebugSymbols>false</DebugSymbols>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+        <DebugType>full</DebugType>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7.0-windows10.0.17763.0|AnyCPU'">
+      <DebugType>none</DebugType>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net48|AnyCPU'">
+      <DebugType>none</DebugType>
+    </PropertyGroup>
+
+    
+    <ItemGroup>
+        <TrimmableAssembly Include="System.Private.Xml" />
+        <TrimmableAssembly Include="Microsoft.CodeAnalysis" />
+        <TrimmableAssembly Include="Microsoft.CodeAnalysis.CSharp" />
+        <TrimmableAssembly Include="Avalonia.Themes.Default" />
+        <TrimmableAssembly Include="Avalonia.X11" />
+        <TrimmableAssembly Include="Avalonia.FreeDesktop" />
+        <TrimmableAssembly Include="Avalonia.Controls.DataGrid" />
+        <TrimmableAssembly Include="Avalonia.OpenGL" />
+        <TrimmableAssembly Include="Avalonia.Diagnostics" />
+        <TrimmableAssembly Include="Avalonia.DesignerSupport" />
+    </ItemGroup>
+    
+    <ItemGroup>
+        <PackageReference Include="Avalonia" Version="0.10.18" />
+        <PackageReference Include="Avalonia.Desktop" Version="0.10.18" />
+        <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
+        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="0.10.18" />
+        <PackageReference Include="MessageBox.Avalonia" Version="2.1.0" />
+        <PackageReference Include="XamlNameReferenceGenerator" Version="1.6.1" />
+    </ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'net48'">
+		<PackageReference Include="Microsoft.Windows.SDK.Contracts" Version="10.0.22621.755" />
+		<PackageReference Include="System.Net.Http" Version="4.3.4" />
+	</ItemGroup>
+	
+	<ItemGroup>
+		<AvaloniaResource Include="Resources\fa-circle-notch.png" />
+		<AvaloniaResource Include="Resources\updater.ico" />
+		<None Remove="Resources\fa-circle-check-regular.png" />
+		<AvaloniaResource Include="Resources\fa-circle-check-regular.png" />
+	</ItemGroup>
+</Project>

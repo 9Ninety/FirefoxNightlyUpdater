@@ -1,0 +1,21 @@
+﻿[*]
+charset = utf-8
+end_of_line = crlf
+indent_size = 4
+indent_style = space
+insert_final_newline = false
+tab_width = 4
+
+[*.cs]
+max_line_length = 140
+dotnet_style_qualification_for_field = true:error
+dotnet_style_qualification_for_property = true:error
+dotnet_style_qualification_for_method = true:error
+dotnet_style_qualification_for_event = true:error
+
+[*.{axaml,xaml}]
+max_line_length = 140
+indent_size = 2
+
+[*.bat]
+max_line_length = 0
