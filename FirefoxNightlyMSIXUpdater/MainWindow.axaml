@@ -15,7 +15,6 @@
         Icon="\Resources\updater.ico"
         ExtendClientAreaToDecorationsHint="True"
         ExtendClientAreaChromeHints="PreferSystemChrome"
-        Closing="WindowClosing"
         Opened="WindowLoaded">
 <Window.Styles>
   <Style Selector="Grid[IsVisible=true].OpacityAnimation">
@@ -50,7 +49,9 @@
   
   <Grid RowDefinitions="*">
     <Panel>
-      <Border IsHitTestVisible="False" Background="White" Opacity="0.875" Padding="10,5,0,0">
+      <Border IsHitTestVisible="False" Background="White" Opacity="0.33" />
+
+      <Border IsHitTestVisible="False" Padding="10,5,0,0" Opacity="0.85">
         <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
           <Image Source="\Resources\updater.ico" Width="16" Height="16" Margin="0,0,10,0" />
           <TextBlock FontSize="14">Firefox Updater</TextBlock>
@@ -60,11 +61,11 @@
 
     <Grid Name="ContentGrid" Margin="10,40,10,10" RowDefinitions="Auto,Auto,*" IsVisible="False" Classes="OpacityAnimation">
       <Grid Grid.Row="0" RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,Auto">
-        <Label Grid.Row="0" Grid.Column="0" FontWeight="DemiBold">Installed version</Label>
-        <Label Grid.Row="0" Grid.Column="1" Name="InstalledVersion" Margin="15,0,0,0" Foreground="#444444">0.0.0.0</Label>
+        <Label Grid.Row="0" Grid.Column="0" FontWeight="SemiBold">Installed version:</Label>
+        <Label Grid.Row="0" Grid.Column="1" Name="InstalledVersion" Foreground="#444444">0.0.0.0</Label>
 
-        <Label Grid.Row="1" Grid.Column="0" FontWeight="DemiBold">Latest version</Label>
-        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" Margin="15,0,0,0">
+        <Label Grid.Row="1" Grid.Column="0" FontWeight="DemiBold">Latest version:</Label>
+        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
           <Label Name="OnlineVersion" Foreground="#444444">0.0.0.0</Label>
           <Label Name="OnlineInstallerDate" Foreground="#6D6D6D" FontWeight="SemiLight">(3000-01-01 00:00)</Label>
         </StackPanel>

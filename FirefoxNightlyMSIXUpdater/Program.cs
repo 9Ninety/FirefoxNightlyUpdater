@@ -1,6 +1,4 @@
 using Avalonia;
-using Avalonia.Controls;
-using Avalonia.Controls.ApplicationLifetimes;
 using System;
 
 namespace FirefoxNightlyMSIXUpdater
@@ -18,10 +16,13 @@ namespace FirefoxNightlyMSIXUpdater
         public static AppBuilder BuildAvaloniaApp()
             => AppBuilder.Configure<App>()
                 .UsePlatformDetect()
-                .With(new Win32PlatformOptions
+            .With(new Win32PlatformOptions
+            {
+                CompositionMode = new[]
                 {
-                    UseWindowsUIComposition = true
-                })
+                    Win32CompositionMode.WinUIComposition
+                }
+            })
                 .LogToTrace();
     }
 }

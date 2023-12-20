@@ -4,7 +4,7 @@
 
 > Update MSIX Firefox Nightly installation by **OneClick**
 >
-> *<div align="right">Powered by .NET 7 and Avalonia UI</div>*
+> *<div align="right">Powered by .NET 8 and Avalonia UI</div>*
 
 ---   
 

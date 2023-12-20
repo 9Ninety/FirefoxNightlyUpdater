@@ -8,9 +8,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{147BFF04-4EA7-405D-B9ED-3EB0240A9860}"
 	ProjectSection(SolutionItems) = preProject
 		Scripts\Publish-All.bat = Scripts\Publish-All.bat
-		Scripts\Publish-NET7-Independence.bat = Scripts\Publish-NET7-Independence.bat
-		Scripts\Publish-NET7.bat = Scripts\Publish-NET7.bat
 		README.md = README.md
+		Scripts\Publish-NET8.bat = Scripts\Publish-NET8.bat
+		Scripts\Publish-NET8-Independence.bat = Scripts\Publish-NET8-Independence.bat
 	EndProjectSection
 EndProject
 Global

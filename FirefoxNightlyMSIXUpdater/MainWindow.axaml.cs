@@ -12,7 +12,8 @@ using Windows.Management.Deployment;
 using System.Linq;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
-using MessageBox.Avalonia.Models;
+using MsBox.Avalonia.Models;
+using MsBox.Avalonia;
 
 namespace FirefoxNightlyMSIXUpdater
 {
@@ -40,6 +41,7 @@ namespace FirefoxNightlyMSIXUpdater
             this.InitializeComponent();
 
             this.SetLoadingMaskVisibility(true).GetAwaiter();
+            this.Closing += this.WindowClosing;
         }
 
         private void WindowLoaded(object sender, EventArgs e)
@@ -60,7 +62,7 @@ namespace FirefoxNightlyMSIXUpdater
                 catch (Exception ex)
                 {
                     await this.DisplayMessage($"Update failed: {this.GetRealErrorMessage(ex)}", "Error",
-                        MessageBox.Avalonia.Enums.Icon.Error);
+                        MsBox.Avalonia.Enums.Icon.Error);
                 }
                 finally
                 {
@@ -76,7 +78,7 @@ namespace FirefoxNightlyMSIXUpdater
             this.Close();
         }
 
-        private void WindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
+        private void WindowClosing(object? sender, System.ComponentModel.CancelEventArgs e)
         {
             e.Cancel = true;
 
@@ -109,7 +111,7 @@ namespace FirefoxNightlyMSIXUpdater
             {
                 await Dispatcher.UIThread.InvokeAsync(() => { this.InstalledVersion.Content = "Not installed"; });
                 await this.DisplayMessage("Firefox Nightly seems not installed on this device", "Error",
-                    MessageBox.Avalonia.Enums.Icon.Error);
+                    MsBox.Avalonia.Enums.Icon.Error);
 
                 return;
             }
@@ -135,7 +137,7 @@ namespace FirefoxNightlyMSIXUpdater
             catch (Exception ex)
             {
                 await this.DisplayMessage($"Unable obtain latest version info: {this.GetRealErrorMessage(ex)}", "Error",
-                    MessageBox.Avalonia.Enums.Icon.Error);
+                    MsBox.Avalonia.Enums.Icon.Error);
 
                 Environment.Exit(1);
                 return;
@@ -226,7 +228,7 @@ namespace FirefoxNightlyMSIXUpdater
 
                     await this.DisplayMessage($"Error while downloading installer: {this.GetRealErrorMessage(ex)}",
                         "Error",
-                        MessageBox.Avalonia.Enums.Icon.Error);
+                        MsBox.Avalonia.Enums.Icon.Error);
 
                     return;
                 }
@@ -253,7 +255,7 @@ namespace FirefoxNightlyMSIXUpdater
 
                 await this.DisplayMessage(
                     $"Error while install package: {this.GetRealErrorMessage(ex)}", "Error",
-                    MessageBox.Avalonia.Enums.Icon.Error);
+                    MsBox.Avalonia.Enums.Icon.Error);
 
                 return;
             }
@@ -274,7 +276,7 @@ namespace FirefoxNightlyMSIXUpdater
             catch (Exception ex)
             {
                 await this.DisplayMessage($"Error while delete installer file: {ex.Message}", "Error",
-                    MessageBox.Avalonia.Enums.Icon.Error);
+                    MsBox.Avalonia.Enums.Icon.Error);
             }
 
 
@@ -340,12 +342,12 @@ namespace FirefoxNightlyMSIXUpdater
 
         #region UI
 
-        private async Task DisplayMessage(string message, string title, MessageBox.Avalonia.Enums.Icon icon)
+        private async Task DisplayMessage(string message, string title, MsBox.Avalonia.Enums.Icon icon)
         {
             await Dispatcher.UIThread.InvokeAsync(() =>
             {
-                var messageBoxStandardWindow = MessageBox.Avalonia.MessageBoxManager.GetMessageBoxCustomWindow(
-                    new MessageBox.Avalonia.DTO.MessageBoxCustomParams
+                var messageBoxStandardWindow = MessageBoxManager.GetMessageBoxCustom(
+                    new MsBox.Avalonia.Dto.MessageBoxCustomParams
                     {
                         WindowIcon = this.Icon,
                         ContentTitle = title,
@@ -361,11 +363,11 @@ namespace FirefoxNightlyMSIXUpdater
 
                 if (Application.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
                 {
-                    return messageBoxStandardWindow.ShowDialog(desktop.MainWindow);
+                    return messageBoxStandardWindow.ShowWindowDialogAsync(desktop.MainWindow);
                 }
                 else
                 {
-                    return messageBoxStandardWindow.Show();
+                    return messageBoxStandardWindow.ShowAsync();
                 }
             });
         }
